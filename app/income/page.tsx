@@ -1,8 +1,14 @@
+import FilterIncome from "@/components/FilterIncom";
+import TransactionExpense from "@/components/TransactionExpense";
+
 const IncomePage = () => {
   return (
     <>
       <div className="w-full">
-        <p>Page Icome</p>
+        <TransactionExpense />
+        
+        {/* filter Income */}
+        <FilterIncome/>
       </div>
     </>
   );

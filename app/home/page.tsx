@@ -7,6 +7,9 @@ import IconSeeMore from "@/public/icons/seeMore";
 import IconGoUp from "@/public/icons/goUp";
 import IconArrowUp from "@/public/icons/arrowUp";
 import IconArrowUpPrimary from "@/public/icons/arrowUpPrimary";
+import AnalitcsReportChart from "@/components/AnalitcsReport";
+import RecentTransaction from "@/components/RecentTransaction";
+import ExpendingSummary from "@/components/ExpendingSummary";
 
 export default function HomePage() {
   const [dataTotal] = useState([
@@ -38,18 +41,20 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="w-full flex justify-between items-center gap-2">
-        <p className="text-[#324C5B] text-[32px] font-semibold">My Dashboard</p>
-        <div className="flex justify-between w-[50%] gap-2">
-          <div className="flex items-center space-x-2 p-4">
-            {/* Material UI TextField with Tailwind CSS Styling */}
+      {/* Search */}
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 items-center gap-4">
+        <p className="text-[#324C5B] text-[20px] md:text-[32px] font-semibold">
+          My Dashboard
+        </p>
+        <div className="flex justify-between w-full md:w-auto gap-0 md:gap-4">
+          <div className="flex items-center space-x-2 p-1 md:p-4 w-full md:w-auto">
             <TextField
               variant="outlined"
               size="small"
               placeholder="Search..."
-              className="max-w-[400px]  " // Tailwind Styling
+              className="w-full max-w-[400px]" // Tailwind styling for responsive width
               sx={{
-                width: "900px",
+                width: "100%", // Full width for small screens
                 "& .MuiOutlinedInput-root": {
                   borderRadius: "10px",
                   "& fieldset": {
@@ -72,14 +77,18 @@ export default function HomePage() {
               }}
             />
 
-            <p>This Month</p>
+            <p className="hidden md:block text-sm text-gray-600">This Month</p>
           </div>
-          <div className="flex justify-end gap-4"></div>
+          <div className="flex justify-end gap-4">
+            {/* You can add more items here as needed */}
+          </div>
         </div>
       </div>
-      <div className="grid grid-cols-[75%_25%] gap-4 pt-8">
+
+      {/* Card */}
+      <div className="grid grid-cols-[100%-100%] md:grid-cols-[75%_25%] gap-4 pt-8">
         <div className="w-full">
-          <div className="grid grid-cols-4 gap-4 p-2">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-0 md:p-2">
             {dataTotal.map((item, index) => (
               <div
                 key={index}
@@ -124,7 +133,6 @@ export default function HomePage() {
                     }`}
                   >
                     {index === 0 ? <IconArrowUp /> : <IconArrowUpPrimary />}{" "}
-                  
                     <p
                       className={`text-[10px] ${
                         index === 0
@@ -148,10 +156,31 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+          {/*  Analitcs Report */}
+          <div className="w-full">
+            <p className="text-[#324C5B] text-[24px] font-bold mt-10 pb-5">
+              Analitcs Report
+            </p>
+            <div className="bg-[#FFFFFF] shadow-md p-8 rounded-[10px] ">
+              <AnalitcsReportChart />
+            </div>
+          </div>
+
+          {/*  Recent Transaction */}
+          <div className="w-full">
+            <p className="text-[#324C5B] text-[24px] font-bold mt-10 pb-5">
+              Recent Transaction
+            </p>
+            <div className="bg-[#FFFFFF] shadow-md p-8 rounded-[10px] ">
+              <RecentTransaction />
+            </div>
+          </div>
         </div>
-        <div className="bg-green-200">
-          {/* Content for grid2 */}
-          Grid 2 - 20%
+        {/* right */}
+        <div className="bg-[#f4f7fa]">
+          <div className="w-full bg-white !p-4">
+            <ExpendingSummary />
+          </div>
         </div>
       </div>
     </>
