@@ -1,8 +1,10 @@
+import ActiveBudget from "@/components/ActiveBudget";
+
 const BudgetPage = () => {
   return (
     <>
       <div className="w-full">
-        <p>Page BudgetPage</p>
+       <ActiveBudget/>
       </div>
     </>
   );
