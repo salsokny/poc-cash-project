@@ -436,10 +436,10 @@ export default function EnhancedTable() {
                         label={row.status}
                         className={`${
                           row.status === "Completed"
-                            ? "!bg-[#DEF7EC] text-[#03543F] !font-medium !text-[12px]"
+                            ? "!bg-[#DEF7EC] !text-[#03543F] !font-medium !text-[12px]"
                             : row.status === "Cancelled"
-                            ? "!bg-[#FDE8E8] text-[#9B1C1C] !font-medium !text-[12px]"
-                            : "!bg-[#EDEBFE] text-[#5521B5] !font-medium !text-[12px]"
+                            ? "!bg-[#FDE8E8] !text-[#9B1C1C] !font-medium !text-[12px]"
+                            : "!bg-[#EDEBFE] !text-[#5521B5] !font-medium !text-[12px]"
                         } text-white rounded-md`}
                       />
                     </TableCell>

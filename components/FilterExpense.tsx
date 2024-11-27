@@ -95,7 +95,7 @@ const rows = [
   createData("Adjustment", "03 June 2022 ", "Here is my income", 50000000000),
 ];
 
-const FilterIncome = () => {
+const ExpensePage = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(8);
 
@@ -141,21 +141,21 @@ const FilterIncome = () => {
     }
   };
 
-   const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("");
 
- const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-  setCategory(event.target.value as string);
-};
+  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setCategory(event.target.value as string);
+  };
 
   return (
     <div className="w-full flex flex-col gap-4 mt-[40px]">
       <p className="text-[#324C5B] text-[20px] md:text-[32px] font-semibold">
-        Filter Income
+       Filter Expense
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-[10px] md:mb-[20px] pt-[4px] md:pt-[10px] ">
         <div className="flex flex-col">
           <p className="block text-[#324C5B] text-sm font-medium mb-2">
-            Category
+          Choose Category
           </p>
           <FormControl
             sx={{
@@ -311,4 +311,4 @@ const FilterIncome = () => {
     </div>
   );
 };
-export default FilterIncome;
+export default ExpensePage;

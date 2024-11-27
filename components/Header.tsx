@@ -4,20 +4,27 @@ import { AppBar, Toolbar, Avatar, Button, Divider } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import { useRouter } from "next/navigation";
 
 export default function Header() {
+   const router = useRouter();
   const pathname = usePathname(); // Get the current path
   // Helper function to check if the link is active
   const isActive = (link: string) => pathname === link;
 
-  return (
+  const handleToSettingPage = () => {
+    router.push("/setting");
+    con
+  }
+
+   return (
     <AppBar position="static" className="!bg-white shadow-md" elevation={0}>
       <Toolbar className="container !bg-white mx-auto max-w-6xl flex justify-between items-center">
         {/* Logo Section */}
         <div className="flex justify-start gap-16">
-          <div className="flex items-center space-x-2">
+          <div  className="flex items-center space-x-2">
             <Image
+           
               src="/images/logo-not-border.png" // The image is inside the public folder
               alt="Logo"
               width={150}
@@ -72,7 +79,9 @@ export default function Header() {
 
         {/* Profile and Logout */}
         <div className="flex items-center space-x-2">
+          <div  onClick={handleToSettingPage} className="w-full" >
           <Avatar alt="Cindy Baker" src="/images/avatar.png" />
+          </div>
           <Divider
           className="!ml-4"
             orientation="vertical"

@@ -20,7 +20,8 @@ export default function RootLayout({
     pathname === "/create-account" ||
     pathname === "/enter-new-password" ||
     pathname === "/verify-code" ||
-    pathname === "/reset-password" || pathname === "/";
+    pathname === "/reset-password" ||
+    pathname === "/";
 
   return (
     <CacheProvider value={clientSideEmotionCache}>

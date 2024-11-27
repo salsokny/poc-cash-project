@@ -7,26 +7,47 @@ import { Button, IconButton, LinearProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 
-const ActiveBudget = () => {
-  const [value, setValue] = useState(75);
+const AchieVedBudget = () => {
+  const [value, setValue] = useState(100);
     
   const [activeBudget] = useState([
     {
-      title: "Watch budget",
+      title: "Phone budget",
       name: "Total Balance",
       percentage: "6.12",
       value: "vs last month",
       amount: 50,
     },
     {
-      title: "Fixed house budget",
+      title: " Clothes budget",
       name: "Income",
       percentage: "6.12",
       value: "vs last month",
       amount: 100,
     },
     {
-      title: "Health check budget",
+      title: "Computer budget",
+      name: "Expend",
+      percentage: "6.12",
+      value: "vs last month",
+      amount: 70,
+    },
+     {
+      title: "Phone budget",
+      name: "Total Balance",
+      percentage: "6.12",
+      value: "vs last month",
+      amount: 50,
+    },
+    {
+      title: " Clothes budget",
+      name: "Income",
+      percentage: "6.12",
+      value: "vs last month",
+      amount: 100,
+    },
+    {
+      title: "Computer budget",
       name: "Expend",
       percentage: "6.12",
       value: "vs last month",
@@ -43,32 +64,12 @@ const ActiveBudget = () => {
       };
 
   return (
-    <div className="w-full flex flex-col gap-4 pt-4">
-      <p className="text-[#324C5B] text-[20px] md:text-[32px] font-semibold">
-        My Budget
-      </p>
-      <div className="bg-[#FFFFFF] p-6 rounded-[10px] shadow-sm">
-        <p className="text-[#324C5B] text-[16px] md:text-[18px] font-medium md:font-semibold ">
-          Transaction Budget
-        </p>
-
-        <div className="flex justify-end gap-2">
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            className=" mt-[20px] !text-[16px] md:!text-[18px] md:mt-8 !bg-[#6DB33F] w-full md:w-[20%] !normal-case !rounded-[5px] !py-1 md:!py-1"
-          >
-            Create budget
-          </Button>
-        </div>
-      </div>
-
-      <div className="w-full pt-4">
+    <div className="w-full flex flex-col gap-4 pt-10 mb-20">
+      <div className="w-full">
         <p className="text-[#324C5B] text-[16px] md:text-[20px] font-medium md:font-semibold pt-4">
-          Active Budget
+          Achieved  Budget
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-7">
           {activeBudget.map((item, index) => (
             <div
               key={index}
@@ -77,16 +78,9 @@ const ActiveBudget = () => {
               <div className="w-full bg-[#F8F8F8] !rounded-tr-[10px] !rounded-tl-[10px]">
                 <div className="flex justify-between items-center gap-2 p-2">
                   <p className="text-[#000000] text-[18px] md:text-[20px] font-medium pl-2 line-clamp-1">
-                   {item.title}
+                    {item.title}
                   </p>
                   <div className="flex justify-end items-center gap-2">
-                    <IconButton aria-label="delete">
-                      <IconsDelete />
-                    </IconButton>
-                    <IconButton aria-label="delete">
-                      <IconEdit />
-                    </IconButton>
-
                     <IconButton aria-label="delete">
                       <IconSeeMoreTop />
                     </IconButton>
@@ -106,7 +100,7 @@ const ActiveBudget = () => {
                           Amount :{" "}
                         </span>
                         <span className="text-[#324C5B] text-[28px] font-medium line-clamp-1">
-                         $ {formatNumber(item.amount)}
+                          $ {formatNumber(item.amount)}
                         </span>
                       </div>
                     </div>
@@ -132,18 +126,15 @@ const ActiveBudget = () => {
                         borderRadius: 2,
                         backgroundColor: "#e0e0e0", // Rail color
                         "& .MuiLinearProgress-bar": {
-                          backgroundColor: "#8AC265", // Progress bar color
+                          backgroundColor: "#FFCA3A", // Progress bar color
                         },
                       }}
                     />
                   </Box>
-                  <div className="w-full pt-5">
+                  <div className="w-full pt-5 ">
                     {" "}
-                    <span className="text-[#7B93A4] text-[14px] font-medium">
-                      $ 20.00
-                    </span>{" "}
                     <span className=" text-[#93A1AA] text-[14px] font-medium">
-                      remaining to complete goal{" "}
+                     Congrats, Goal completed
                     </span>
                   </div>
                 </div>
@@ -156,4 +147,4 @@ const ActiveBudget = () => {
   );
 };
 
-export default ActiveBudget;
+export default AchieVedBudget;

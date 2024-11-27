@@ -1,15 +1,14 @@
 "use client";
-
+import React, { useState } from "react";
 import {
   Button,
   FormControl,
-  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import { format } from "date-fns";
 
 const categories = [
   { id: 1, name: "Technology" },
@@ -19,12 +18,17 @@ const categories = [
   { id: 5, name: "Entertainment" },
 ];
 
-const TransactionExpense = () => {
+const MyExpense = () => {
   const [amount, setAmount] = useState("");
   const [error, setError] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [note, setNote] = useState("");
   const [date, setDate] = useState("");
+  const [formError, setFormError] = useState({
+    amount: "",
+    selectedCategory: "",
+    date: "",
+  });
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setSelectedCategory(event.target.value as string);
@@ -32,7 +36,6 @@ const TransactionExpense = () => {
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    // Allow only numbers and an optional decimal point
     if (/^\d*\.?\d*$/.test(value)) {
       setAmount(value);
       setError("");
@@ -45,12 +48,36 @@ const TransactionExpense = () => {
     setNote(e.target.value);
   };
 
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDate(e.target.value);
+  const [formattedDate, setFormattedDate] = useState("");
+
+const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const inputDate = new Date(e.target.value); // Create a Date object from the input value
+  const formattedDateForInput = e.target.value; // Keep the value in the correct format for the input
+
+  // Format the date for display
+  const formattedDateForDisplay = format(inputDate, "dd MMMM yyyy h:mm a");
+
+  // Update the state
+  setDate(formattedDateForInput); // Store the value for datetime-local
+  setFormattedDate(formattedDateForDisplay); // Store the formatted date for display
+};
+
+  const validateForm = () => {
+    const errors = {
+      amount: amount ? "" : "Amount is required",
+      selectedCategory: selectedCategory ? "" : "Category is required",
+      date: date ? "" : "Date is required",
+    };
+    setFormError(errors);
+    return !Object.values(errors).some((error) => error); // Return true if no errors
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return; // If the form is not valid, do not submit
+    }
 
     // Here you can handle the form submission
     console.log("Form submitted with data:", {
@@ -70,7 +97,7 @@ const TransactionExpense = () => {
   return (
     <div className="w-full flex flex-col gap-4 pt-4">
       <p className="text-[#324C5B] text-[20px] md:text-[32px] font-semibold">
-        My Income
+        My Expense
       </p>
       <p className="text-[#324C5B] text-[16px] md:text-[20px] font-medium md:font-semibold pt-4">
         Transaction Expense
@@ -82,7 +109,7 @@ const TransactionExpense = () => {
         </p>
 
         <form onSubmit={handleSubmit} className="w-full">
-          <div className="flex justify-start gap-4 pt-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-5">
             {/* Select Category */}
             <div className="flex flex-col gap-2">
               <p className="block text-[#324C5B] text-sm font-medium mb-1">
@@ -103,6 +130,7 @@ const TransactionExpense = () => {
                 }}
                 variant="outlined"
                 size="small"
+                error={!!formError.selectedCategory}
               >
                 <InputLabel id="category-select-label">Category</InputLabel>
                 <Select
@@ -119,47 +147,43 @@ const TransactionExpense = () => {
                   ))}
                 </Select>
               </FormControl>
+              {formError.selectedCategory && (
+                <p className="text-red-500 text-xs">
+                  {formError.selectedCategory}
+                </p>
+              )}
             </div>
 
             {/* Date Picker */}
             <div className="flex flex-col gap-2">
-              {/* <p className="block text-[#324C5B] text-sm font-medium mb-1">
-                Date
+              <p className="block text-start md:text-center  text-[#324C5B] text-sm font-medium mb-1">
+                Date Time
               </p>
-              <TextField
-                id="date"
-                variant="outlined"
-                type="date"
-                fullWidth
-                value={date}
-                onChange={handleDateChange}
-                className="text-sm border-gray-300 focus:ring-2 focus:ring-primary-500 !rounded-[12px]"
-                InputProps={{
-                  classes: {
-                    root: "rounded-lg border-gray-300 focus:ring-primary-500",
-                    input: "text-sm",
-                  },
-                }}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    height: "45px",
-                    borderRadius: "8px",
-                    "& fieldset": {
-                      borderColor: "#E1E9EE",
-                      borderWidth: "1px",
+              <div className="flex justify-end">
+                <TextField
+                  id="datetime"
+                  variant="outlined"
+                  type="datetime-local" // This allows both date and time input
+                  fullWidth
+                  value={date} // The value bound to your `date` state (in the correct format)
+                  onChange={handleDateChange} // Your existing date change handler
+                  error={!!formError.date} // Display error if there's an issue
+                  helperText={formError.date} // Display the error message if any
+                  placeholder="Select Date and Time" // Placeholder text
+                  className="text-sm border-gray-300 focus:ring-2 focus:ring-primary-500 !rounded-[12px]"
+                  sx={{
+                    width: "303px",
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: "8px",
+                      height: "40px",
+                      fontSize: "14px",
+                      "& fieldset": { borderColor: "#6D7D9326" },
+                      "&:hover fieldset": { borderColor: "#6DB33F" },
+                      "&.Mui-focused fieldset": { borderColor: "#6DB33F" },
                     },
-                    "&:hover fieldset": {
-                      borderColor: "#93A1AA",
-                    },
-                    "&.Mui-focused fieldset": {
-                      borderColor: "#6DB33F",
-                    },
-                  },
-                  "& .MuiInputBase-input": {
-                    fontSize: "14px",
-                  },
-                }}
-              /> */}
+                  }}
+                />
+              </div>
             </div>
           </div>
 
@@ -177,8 +201,8 @@ const TransactionExpense = () => {
                 value={amount}
                 onChange={handleAmountChange}
                 placeholder="Input Amount"
-                error={!!error}
-                helperText={error}
+                error={!!error || !!formError.amount}
+                helperText={error || formError.amount}
                 className="text-sm border-gray-300 focus:ring-2 focus:ring-primary-500 !rounded-[12px]"
                 InputProps={{
                   classes: {
@@ -253,14 +277,22 @@ const TransactionExpense = () => {
               />
             </div>
 
-            <div className="flex justify-end gap-2">
+            <div className="flex justify-end ">
               <Button
                 type="submit"
                 variant="contained"
-                color="primary"
-                className=" mt-[30px] !text-[18px] md:!text-[20px] md:mt-12 !bg-[#6DB33F] w-full md:w-[30%] !normal-case !rounded-[5px] !py-1 md:!py-2"
+                className=" mt-[30px] !text-[18px] md:!text-[20px] md:mt-12 !bg-[#6DB33F] w-full md:w-[30%] !normal-case !rounded-[5px] !py-0 md:!py-2"
+                sx={{
+                  backgroundColor: "#1D9B28",
+                  width: "100%",
+                  height: "50px",
+                  borderRadius: "12px",
+                  "&:hover": {
+                    backgroundColor: "#1D9B28",
+                  },
+                }}
               >
-                Add Income
+                Add Expense
               </Button>
             </div>
           </div>
@@ -270,4 +302,4 @@ const TransactionExpense = () => {
   );
 };
 
-export default TransactionExpense;
+export default MyExpense;
