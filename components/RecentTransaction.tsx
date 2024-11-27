@@ -369,14 +369,15 @@ export default function EnhancedTable() {
   );
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Paper style={{ height: "100%", width: "100%" }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+      <div className="bg-[#FFFFFF] !rounded-[10px] shadow-sm">
+          <Paper
+              sx={{ width: "100%", overflow: "hidden" }}
+              className="!rounded-[10px]"
+          >
+        {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
         <TableContainer>
           <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
+            sx={{ minWidth: 700 }} aria-label="customized table"
           >
             <EnhancedTableHead
               numSelected={selected.length}
@@ -468,7 +469,8 @@ export default function EnhancedTable() {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
    
-      </Paper>
-    </Box>
+          </Paper>
+          </div>
+    // </Box>
   );
 }

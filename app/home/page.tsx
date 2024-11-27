@@ -162,7 +162,7 @@ export default function HomePage() {
               Analitcs Report
             </p>
             <div className="bg-[#FFFFFF] shadow-md p-8 rounded-[10px] ">
-              <AnalitcsReportChart />
+              {/* <AnalitcsReportChart /> */}
             </div>
           </div>
 

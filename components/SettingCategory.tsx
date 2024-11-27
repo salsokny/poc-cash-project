@@ -1,4 +1,5 @@
 import IconCategory from "@/public/icons/category";
+import IconCategoryPrimary from "@/public/icons/categoryPrimary";
 import IconDeleteAccount from "@/public/icons/deleteAccount";
 import IconEdit from "@/public/icons/edit";
 import IconLogOut from "@/public/icons/logOut";
@@ -6,14 +7,15 @@ import IconSetting from "@/public/icons/setting";
 import { Avatar, Button, Divider } from "@mui/material";
 
 import { useRouter } from 'next/navigation';
+import AccountSettingPrimary from "./AccountSettingPrimay";
 
-const Setting = () => {
+const SettingCategory = () => {
 
     const router = useRouter()
     const handlToAccountSetting = () => {
         router.push('/setting')
     }
- 
+
     const handlToSettingCategory = () => {
         router.push('/setting/category')
     }
@@ -27,14 +29,14 @@ const Setting = () => {
                 <div className="bg-white h-[400px]  md:min-h-[670px] p-4 rounded-[10px] w-full relative">
                     <div className="flex flex-col gap-4">
                         <div onClick={handlToAccountSetting} className="flex justify-start gap-2 py-4 px-3 hover:bg-[#f4f7fa]">
-                            <IconSetting />
-                            <p className="text-[#6DB33F] text-[18px] md:text-[20px] font-semibold">
+                            <AccountSettingPrimary />
+                            <p className="text-[#616872CC] text-[18px] md:text-[20px] font-medium">
                                 Account Setting
                             </p>
                         </div>
                         <div onClick={handlToSettingCategory} className="flex justify-start gap-2 py-4 px-3 hover:bg-[#f4f7fa]">
-                            <IconCategory />
-                            <p className="text-[#616872CC] text-[18px] md:text-[20px] font-medium">
+                            <IconCategoryPrimary />
+                            <p className="text-[#6DB33F] text-[18px] md:text-[20px] font-semibold">
                                 Category
                             </p>
                         </div>
@@ -231,4 +233,4 @@ const Setting = () => {
     );
 };
 
-export default Setting;
+export default SettingCategory;
