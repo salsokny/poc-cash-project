@@ -11,15 +11,7 @@ import {
   Chip,
   TablePagination,
   Button,
-  TextField,
-  MenuItem,
-  Select,
-  FormControl,
-  InputLabel,
-  InputAdornment,
 } from "@mui/material";
-import IconClock from "@/public/icons/clock";
-import SearchIcon from '@mui/icons-material/Search';
 
 interface Data {
   id: number;
@@ -30,6 +22,27 @@ interface Data {
 }
 
 const rows: Data[] = [
+  {
+    id: 1,
+    transactionId: "Payment from Bonnie Green",
+    dateTime: "Apr 23 ,2021",
+    amount: 2300,
+    status: "Completed",
+  },
+  {
+    id: 2,
+    transactionId: "Payment refund to #00910",
+    dateTime: "Apr 23 ,2021",
+    amount: 2300,
+    status: "Cancelled",
+  },
+  {
+    id: 3,
+    transactionId: "Payment failed from #087651",
+    dateTime: "Apr 23 ,2021",
+    amount: 2300,
+    status: "In progress",
+  },
   {
     id: 1,
     transactionId: "Payment from Bonnie Green",
@@ -95,17 +108,17 @@ const rows: Data[] = [
   },
   {
     id: 10,
-    transactionId: "Payment from Bonnie Green",
+    transactionId: "Payment failed from #087651",
     dateTime: "Apr 23 ,2021",
     amount: 2300,
-    status: "Completed",
+    status: "In progress",
   },
   {
     id: 11,
-    transactionId: "Payment refund to #00910",
+    transactionId: "Payment failed from #087651",
     dateTime: "Apr 23 ,2021",
     amount: 2300,
-    status: "Cancelled",
+    status: "In progress",
   },
   {
     id: 12,
@@ -114,35 +127,12 @@ const rows: Data[] = [
     amount: 2300,
     status: "In progress",
   },
-  {
-    id: 13,
-    transactionId: "Payment failed from #087651",
-    dateTime: "Apr 23 ,2021",
-    amount: 2300,
-    status: "In progress",
-  },
-  {
-    id: 14,
-    transactionId: "Payment failed from #087651",
-    dateTime: "Apr 23 ,2021",
-    amount: 2300,
-    status: "In progress",
-  },
-  {
-    id: 15,
-    transactionId: "Payment failed from #087651",
-    dateTime: "Apr 23 ,2021",
-    amount: 2300,
-    status: "In progress",
-  },
 ];
-
 const CheckboxTable: React.FC = () => {
   const [selected, setSelected] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [filter, setFilter] = useState("all");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [showThisWeek, setShowThisWeek] = useState(false);
 
   const isSelected = (id: number) => selected.includes(id);
 
@@ -168,49 +158,35 @@ const CheckboxTable: React.FC = () => {
     setSelected(newSelected);
   };
 
-  const handlePageChange = (_: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+  const handlePageChange = (
+    _: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
     setCurrentPage(newPage);
   };
 
-  const handleRowsPerPageChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleRowsPerPageChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setCurrentPage(0);
   };
 
-  const filterRows = () => {
-    const now = new Date();
-    let filteredRows = [...rows];
+  const filterThisWeek = () => {
+    const startOfWeek = new Date();
+    startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
 
-    // Apply date filters
-    if (filter === "last30days") {
-      const last30Days = new Date();
-      last30Days.setDate(now.getDate() - 30);
-      filteredRows = filteredRows.filter((row) => new Date(row.dateTime) >= last30Days);
-    } else if (filter === "thisweek") {
-      const startOfWeek = new Date();
-      startOfWeek.setDate(now.getDate() - now.getDay());
-      const endOfWeek = new Date();
-      endOfWeek.setDate(startOfWeek.getDate() + 6);
-      filteredRows = filteredRows.filter((row) => {
-        const rowDate = new Date(row.dateTime);
-        return rowDate >= startOfWeek && rowDate <= endOfWeek;
-      });
-    } else if (filter === "thismonth") {
-      const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-      filteredRows = filteredRows.filter((row) => new Date(row.dateTime) >= startOfMonth);
-    }
+    const endOfWeek = new Date();
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
 
-    // Apply search filter
-    if (searchQuery) {
-      filteredRows = filteredRows.filter((row) =>
-        row.transactionId.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
-
-    return filteredRows;
+    return rows.filter((row) => {
+      const rowDate = new Date(row.dateTime);
+      return rowDate >= startOfWeek && rowDate <= endOfWeek;
+    });
   };
 
-  const displayedRows = filterRows();
+  const displayedRows = showThisWeek ? filterThisWeek() : rows;
+
   const paginatedRows = displayedRows.slice(
     currentPage * rowsPerPage,
     currentPage * rowsPerPage + rowsPerPage
@@ -218,93 +194,16 @@ const CheckboxTable: React.FC = () => {
 
   return (
     <Paper>
-      <div className="flex justify-between gap-5 p-4">
-        <FormControl className="hidden md:flex" size="small">
-          <InputLabel>Filter</InputLabel>
-          <Select
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-            label="Filter"
-            className="!text-sm !border-gray-300  !rounded-lg"
-            sx={{
-              minWidth: 200,
-              "& .MuiOutlinedInput-root": {
-                 height: '40px',
-                borderRadius: "10px",
-                "& fieldset": {
-                  borderColor: "#E1E9EE", // Default border color
-                },
-                "&:hover fieldset": {
-                  borderColor: "#6DB33F", // Border color when hovered
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#6DB33F", // Border color when focused
-                },
-              },
-              "& .MuiInputBase-input": {
-                fontSize: "12px", // Font size for the input text
-              },
-            }}
-          >
-            <MenuItem value="all">
-              <div className="flex justify-start items-center gap-4">
-                <IconClock />
-                Last 30 Days
-              </div>
-            </MenuItem>
-            <MenuItem value="thisweek">
-              <div className="flex justify-start items-center gap-4">
-                <IconClock />
-                This Week
-              </div>
-            </MenuItem>
-            <MenuItem value="thismonth">
-              <div className="flex justify-start items-center gap-4">
-                <IconClock />
-                This Month
-              </div>
-            </MenuItem>
-          </Select>
-        </FormControl>
-
-       <TextField
-          size="small"
-          label=""
-          variant="outlined"
-          className="!text-sm !border-gray-300 !rounded-lg"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search..."
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-            // Customize the input element's styles
-          
-          }}
-          sx={{
-            minWidth: 300,
-           
-            // Additional styling for the TextField container if needed
-            "& .MuiOutlinedInput-root": {
-               height: '40px', 
-              borderRadius: "10px", // Border radius for the overall input
-            },
-            "& .MuiInputBase-input": {
-              fontSize: "12px", // Placeholder and input text size
-            },
-            "& .MuiInputLabel-root": {
-              fontSize: "12px", // Label font size
-            },
-          }}
-        />
-      </div>
-
-      <TableContainer className="!bg-[#F9FAFB]">
+      <Button
+        variant="outlined"
+        onClick={() => setShowThisWeek((prev) => !prev)}
+        sx={{ margin: 2 }}
+      >
+        {showThisWeek ? "Show All Transactions" : "Filter This Week"}
+      </Button>
+      <TableContainer>
         <Table>
-          <TableHead className="!border-b-[2px] !border-[#6DB33F]">
+          <TableHead className="border-b-[2px] border-[#6DB33F]">
             <TableRow>
               <TableCell padding="checkbox">
                 <Checkbox
@@ -316,12 +215,12 @@ const CheckboxTable: React.FC = () => {
                   onChange={handleSelectAllClick}
                 />
               </TableCell>
-              <TableCell >
+              <TableCell>
                 <p className="!text-[#6B7280] !text-[14px] !font-semibold">
                   TRANSACTION
                 </p>
               </TableCell>
-              <TableCell >
+              <TableCell>
                 {" "}
                 <p className="!text-[#6B7280] !text-[14px] !font-semibold">
                   DATE & TIME
@@ -356,19 +255,19 @@ const CheckboxTable: React.FC = () => {
                 </TableCell>
                 <TableCell>
                   {" "}
-                  <p className="!text-[#111928] !line-clamp-1 !text-[14px] !font-normal">
+                  <p className="!text-[#111928] !text-[14px] !font-normal">
                     {row.transactionId}
                   </p>
                 </TableCell>
                 <TableCell>
                   {" "}
-                  <p className="!text-[#6B7280]  !line-clamp-1 !text-[14px]  !font-normal">
+                  <p className="!text-[#6B7280] !text-[14px]  !font-normal">
                     {row.dateTime}
                   </p>
                 </TableCell>
                 <TableCell>
                   {" "}
-                  <p className="!text-[#6D7D93]  !line-clamp-1 !text-[14px] !font-normal">{`$${row.amount.toFixed(
+                  <p className="!text-[#6D7D93] !text-[14px] !font-normal">{`$${row.amount.toFixed(
                     2
                   )}`}</p>
                 </TableCell>
@@ -390,7 +289,6 @@ const CheckboxTable: React.FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
-
       <TablePagination
         rowsPerPageOptions={[5, 10, 15]}
         component="div"

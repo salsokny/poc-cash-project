@@ -12,6 +12,7 @@ import RecentTransaction from "@/components/RecentTransaction";
 import ExpendingSummary from "@/components/ExpendingSummary";
 
 export default function HomePage() {
+
   const [dataTotal] = useState([
     {
       name: "Total Balance",
@@ -85,9 +86,9 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Card */}
-      <div className="grid grid-cols-[100%-100%] md:grid-cols-[75%_25%] gap-4 pt-8">
-        <div className="w-full">
+      {/* Card grid-cols-[100%-100%] md:grid-cols-[75%_25%]*/}
+      <div className="grid grid-cols-1 md:grid-cols-4  gap-4 pt-8">
+        <div className="w-full col-span-3 ">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-0 md:p-2">
             {dataTotal.map((item, index) => (
               <div
@@ -162,7 +163,7 @@ export default function HomePage() {
               Analitcs Report
             </p>
             <div className="bg-[#FFFFFF] shadow-md p-8 rounded-[10px] ">
-              {/* <AnalitcsReportChart /> */}
+              <AnalitcsReportChart />
             </div>
           </div>
 
@@ -171,7 +172,7 @@ export default function HomePage() {
             <p className="text-[#324C5B] text-[24px] font-bold mt-10 pb-5">
               Recent Transaction
             </p>
-            <div className="bg-[#FFFFFF] shadow-md p-8 rounded-[10px] ">
+            <div className="bg-[#FFFFFF] shadow-md rounded-[10px] ">
               <RecentTransaction />
             </div>
           </div>

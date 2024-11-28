@@ -185,8 +185,8 @@ const AnalitcsReportChart =() => {
               area: true, // Show the area under the line
               showMark: false,
               stack: "total",
-              color:"rgba(109, 179, 63, 0.9)", // 20% opacity
-              fill: "#d3e9c7", // Gradient fill color
+              color:"#bfe7a4", // 20% opacity
+             
             },
           ]}
           yAxis={[
@@ -208,7 +208,7 @@ const AnalitcsReportChart =() => {
               backgroundColor: "rgba(109, 179, 63, 0.9)",
             },
             [`& .${lineElementClasses.area}`]: {
-              backgroundColor: "#6DB33F", // Custom background color for the area element (example: tomato color)
+              backgroundColor: "#bfe7a4", // Custom background color for the area element (example: tomato color)
             },
           }}
         ></LineChart>

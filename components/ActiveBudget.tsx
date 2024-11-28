@@ -6,10 +6,11 @@ import IconSeeMoreTop from "@/public/icons/seeMoreTop";
 import { Button, IconButton, LinearProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const ActiveBudget = () => {
   const [value, setValue] = useState(75);
-    
+  const router = useRouter();
   const [activeBudget] = useState([
     {
       title: "Watch budget",
@@ -34,14 +35,17 @@ const ActiveBudget = () => {
     },
   ]);
 
-      const formatNumber = (value: number): string => {
-        return new Intl.NumberFormat("en-US", {
-          style: "decimal",
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        }).format(value);
-      };
+  const formatNumber = (value: number): string => {
+    return new Intl.NumberFormat("en-US", {
+      style: "decimal",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(value);
+  };
 
+  const handleToCreateBudget = () => {
+    router.push('/create-budget')
+  }
   return (
     <div className="w-full flex flex-col gap-4 pt-4">
       <p className="text-[#324C5B] text-[20px] md:text-[32px] font-semibold">
@@ -54,6 +58,7 @@ const ActiveBudget = () => {
 
         <div className="flex justify-end gap-2">
           <Button
+            onClick={handleToCreateBudget}
             type="submit"
             variant="contained"
             color="primary"
