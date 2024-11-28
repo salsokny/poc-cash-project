@@ -3,6 +3,7 @@ import IconBudget from "@/public/icons/budget";
 import IconsDelete from "@/public/icons/delete";
 import IconEdit from "@/public/icons/edit";
 import IconSeeMoreTop from "@/public/icons/seeMoreTop";
+import { Router } from "@mui/icons-material";
 import { Button, IconButton, LinearProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
@@ -55,14 +56,17 @@ const AchieVedBudget = () => {
     },
   ]);
 
-      const formatNumber = (value: number): string => {
-        return new Intl.NumberFormat("en-US", {
-          style: "decimal",
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        }).format(value);
-      };
+    const formatNumber = (value: number): string => {
+    return new Intl.NumberFormat("en-US", {
+        style: "decimal",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    }).format(value);
+    };
 
+    const handleToBudGetDetail = () => {
+        console.log("Helll")
+    }
   return (
     <div className="w-full flex flex-col gap-4 pt-10 mb-20">
       <div className="w-full">
@@ -73,7 +77,8 @@ const AchieVedBudget = () => {
           {activeBudget.map((item, index) => (
             <div
               key={index}
-              className={`bg-white  border-[1px] border-[#E1E9EE] !rounded-[10px] gap-2 flex flex-col items-start transition-all duration-300 relative `}
+                  className={`bg-white  border-[1px] border-[#E1E9EE] !rounded-[10px] gap-2 flex flex-col items-start transition-all duration-300 relative `}
+              onClick={handleToBudGetDetail}
             >
               <div className="w-full bg-[#F8F8F8] !rounded-tr-[10px] !rounded-tl-[10px]">
                 <div className="flex justify-between items-center gap-2 p-2">
