@@ -7,10 +7,11 @@ import { Router } from "@mui/icons-material";
 import { Button, IconButton, LinearProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const AchieVedBudget = () => {
   const [value, setValue] = useState(100);
-    
+  const router = useRouter();
   const [activeBudget] = useState([
     {
       title: "Phone budget",
@@ -65,7 +66,7 @@ const AchieVedBudget = () => {
     };
 
     const handleToBudGetDetail = () => {
-        console.log("Helll")
+        router.push('/budget/details')
     }
   return (
     <div className="w-full flex flex-col gap-4 pt-10 mb-20">
@@ -77,7 +78,7 @@ const AchieVedBudget = () => {
           {activeBudget.map((item, index) => (
             <div
               key={index}
-                  className={`bg-white  border-[1px] border-[#E1E9EE] !rounded-[10px] gap-2 flex flex-col items-start transition-all duration-300 relative `}
+             className={`bg-white  border-[1px] border-[#E1E9EE] !rounded-[10px] gap-2 flex flex-col items-start transition-all duration-300 relative mb-2 md:mb-10`}
               onClick={handleToBudGetDetail}
             >
               <div className="w-full bg-[#F8F8F8] !rounded-tr-[10px] !rounded-tl-[10px]">

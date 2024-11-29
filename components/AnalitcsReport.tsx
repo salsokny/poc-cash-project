@@ -28,7 +28,7 @@ const monthlyData = {
 
 // Example x-axis labels
 const xLabels = [
-   "Jan",
+  "Jan",
   "Feb",
   "Mar",
   "Apr",
@@ -43,9 +43,14 @@ const xLabels = [
 ];
 
 const yLabels = [0, 2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000];
-const AnalitcsReportChart =() => {
+const AnalitcsReportChart = () => {
   const [selectedMonth, setSelectedMonth] =
     React.useState<keyof typeof monthlyData>("Jan");
+
+  const totalExpense = "Total Expense"; // Example value
+  const [selectTotalExpense, setSelectTotalExpense] =
+    React.useState(totalExpense);
+
   const [earningFilter, setEarningFilter] = React.useState<number>(0);
 
   // Filter months based on total earnings threshold
@@ -67,8 +72,10 @@ const AnalitcsReportChart =() => {
     ? filteredData.reduce((sum, value) => sum + value, 0)
     : 0;
 
-  const handleMonthChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setSelectedMonth(event.target.value as keyof typeof monthlyData);
+  const handleChangeTotalExpense = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSelectTotalExpense(event.target.value as number);
   };
 
   const handleEarningFilterChange = (
@@ -83,85 +90,54 @@ const AnalitcsReportChart =() => {
       <div className="flex justify-end gap-4">
         <FormControl
           sx={{
-            width: "120px", // Width of the FormControl
-            margin: "normal",
+            width: "150px",
             "& .MuiOutlinedInput-root": {
-              height: "40px", // Custom height of the input field
-              fontSize: "14px", // Font size inside the input
-              "& fieldset": {
-                borderColor: "#6D7D9326", // Default border color
-              },
-              "&:hover fieldset": {
-                borderColor: "#6DB33F", // Border color on hover
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "#6DB33F", // Border color when focused
-              },
+              borderRadius: "8px",
+              height: "40px",
+              fontSize: "14px",
+              "& fieldset": { borderColor: "#6D7D9326" },
+              "&:hover fieldset": { borderColor: "#6DB33F" },
+              "&.Mui-focused fieldset": { borderColor: "#6DB33F" },
             },
           }}
+          variant="outlined"
+          size="small"
         >
-          <InputLabel id="demo-multiple-name-label">Total Earning</InputLabel>
           <Select
             labelId="month-select-label"
-            value={selectedMonth}
-            onChange={handleEarningFilterChange}
-            input={<OutlinedInput label="Total Earning" />}
+            value={selectTotalExpense}
+            onChange={handleChangeTotalExpense}
+            input={<OutlinedInput label="" />}
             renderValue={(selected) => (selected ? selected : "Select Month")} // Placeholder text
-            MenuProps={{
-              PaperProps: {
-                sx: {
-                  "& .MuiMenuItem-root": {
-                    fontSize: "14px", // Custom font size for dropdown items
-                  },
-                },
-              },
-            }}
           >
-            {/* Dropdown options */}
-            {Object.keys(monthlyData).map((month) => (
-              <MenuItem key={month} value={month}>
-                {month}
-              </MenuItem>
-            ))}
+            <MenuItem value="10">10</MenuItem>
+            <MenuItem value="20">20</MenuItem>
+            <MenuItem value="30">30</MenuItem>
           </Select>
         </FormControl>
 
         {/* Dropdown to filter by month */}
         <FormControl
           sx={{
-            width: "120px", // Width of the FormControl
-            margin: "normal",
+            width: "150px",
             "& .MuiOutlinedInput-root": {
-              height: "40px", // Custom height of the input field
-              fontSize: "14px", // Font size inside the input
-              "& fieldset": {
-                borderColor: "#6D7D9326", // Default border color
-              },
-              "&:hover fieldset": {
-                borderColor: "#6DB33F", // Border color on hover
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "#6DB33F", // Border color when focused
-              },
+              borderRadius: "8px",
+              height: "40px",
+              fontSize: "14px",
+              "& fieldset": { borderColor: "#6D7D9326" },
+              "&:hover fieldset": { borderColor: "#6DB33F" },
+              "&.Mui-focused fieldset": { borderColor: "#6DB33F" },
             },
           }}
+          variant="outlined"
+          size="small"
         >
-          <InputLabel id="demo-multiple-name-label">Monthly</InputLabel>
           <Select
             labelId="month-select-label"
             value={selectedMonth}
             onChange={handleEarningFilterChange}
-            input={<OutlinedInput label="Monthly" />}
+            input={<OutlinedInput label="" />}
             renderValue={(selected) => (selected ? selected : "Select Month")} // Placeholder text
-            MenuProps={{
-              PaperProps: {
-                sx: {
-                  "& .MuiMenuItem-root": {
-                    fontSize: "14px", // Custom font size for dropdown items
-                  },
-                },
-              },
-            }}
           >
             {/* Dropdown options */}
             {Object.keys(monthlyData).map((month) => (
@@ -185,10 +161,12 @@ const AnalitcsReportChart =() => {
               area: true, // Show the area under the line
               showMark: false,
               stack: "total",
-              color:"#bfe7a4", // 20% opacity
-             
+              color: "#bfe7a4", // 20% opacity
             },
           ]}
+          slotProps={{
+            legend: { hidden: true },
+          }}
           yAxis={[
             {
               scaleType: "linear", // Use linear scale for numerical data
@@ -222,6 +200,6 @@ const AnalitcsReportChart =() => {
       </div>
     </div>
   );
-}
+};
 
 export default AnalitcsReportChart;

@@ -10,6 +10,9 @@ import IconArrowUpPrimary from "@/public/icons/arrowUpPrimary";
 import AnalitcsReportChart from "@/components/AnalitcsReport";
 import RecentTransaction from "@/components/RecentTransaction";
 import ExpendingSummary from "@/components/ExpendingSummary";
+import ProgressList from "@/components/ProgressBudget";
+import BudgetAchievement from "@/components/BudgetAchievement";
+
 
 export default function HomePage() {
 
@@ -87,7 +90,7 @@ export default function HomePage() {
       </div>
 
       {/* Card grid-cols-[100%-100%] md:grid-cols-[75%_25%]*/}
-      <div className="grid grid-cols-1 md:grid-cols-4  gap-4 pt-8">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-0  md:gap-4 pt-8">
         <div className="w-full col-span-3 ">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-0 md:p-2">
             {dataTotal.map((item, index) => (
@@ -178,11 +181,26 @@ export default function HomePage() {
           </div>
         </div>
         {/* right */}
-        <div className="bg-[#f4f7fa]">
-          <div className="w-full bg-white !p-4">
+        {/* your expending */}
+        <div className="bg-[#f4f7fa] mr-0 md:mr-[-100px] mt-[40px] md:mt-0">
+          <div className="flex flex-col gap-8">
+          <div className="w-full bg-white border-[#6D7D9326] border-[1px] rounded-[10px] !p-4">
             <ExpendingSummary />
           </div>
+          {/* progress budget */}
+          <div className="w-full bg-white border-[#6D7D9326] border-[1px] rounded-[10px] !p-4">
+            <ProgressList />
+          </div>
+
+          {/* Budget achievement */}
+
+           <div className="w-full bg-white border-[#6D7D9326] border-[1px] rounded-[10px] !p-4 !py-6">
+            <BudgetAchievement />
+           </div>
+
+          </div>
         </div>
+
       </div>
     </>
   );

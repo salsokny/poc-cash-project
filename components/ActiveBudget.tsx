@@ -46,8 +46,13 @@ const ActiveBudget = () => {
   const handleToCreateBudget = () => {
     router.push('/create-budget')
   }
+
+  const handleToBudGetDetail = () => { 
+    router.push('/budget/detail')
+  }
+
   return (
-    <div className="w-full flex flex-col gap-4 pt-4">
+    <div className="w-full flex flex-col gap-4 pt-4 ">
       <p className="text-[#324C5B] text-[20px] md:text-[32px] font-semibold">
         My Budget
       </p>
@@ -78,11 +83,12 @@ const ActiveBudget = () => {
             <div
               key={index}
               className={`bg-white  border-[1px] border-[#E1E9EE] !rounded-[10px] gap-2 flex flex-col items-start transition-all duration-300 relative `}
+              onClick={handleToBudGetDetail}
             >
               <div className="w-full bg-[#F8F8F8] !rounded-tr-[10px] !rounded-tl-[10px]">
                 <div className="flex justify-between items-center gap-2 p-2">
                   <p className="text-[#000000] text-[18px] md:text-[20px] font-medium pl-2 line-clamp-1">
-                   {item.title}
+                    {item.title}
                   </p>
                   <div className="flex justify-end items-center gap-2">
                     <IconButton aria-label="delete">
@@ -111,7 +117,7 @@ const ActiveBudget = () => {
                           Amount :{" "}
                         </span>
                         <span className="text-[#324C5B] text-[28px] font-medium line-clamp-1">
-                         $ {formatNumber(item.amount)}
+                          $ {formatNumber(item.amount)}
                         </span>
                       </div>
                     </div>
