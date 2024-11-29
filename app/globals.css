@@ -46,3 +46,15 @@ body {
     animation: zoom 2s ease-in-out infinite;
 }
 
+/* In your stylesheet (e.g., styles.css) */
+.css-ruithe-MuiAreaElement-root {
+  fill: #f0f7ec; /* Set your custom fill color */
+}
+
+.echarts-tooltip {
+    background-color: #6DB33FD9 !important;
+    color: #bfe7a4 !important;
+    font-size: 14px !important;
+    padding: 8px !important;
+    border-radius: 8px !important;
+}

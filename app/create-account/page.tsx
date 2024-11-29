@@ -117,10 +117,10 @@ const CreateAccount = () => {
   };
 
   return (
-    <div className="flex w-full h-screen pb-[50px]">
+    <div className="flex w-full h-full pb-[50px]">
       {/* Right side: Logo */}
 
-      <div className="hidden md:flex !h-full items-center justify-center w-1/2 bg-[#6DB33F]">
+      <div className="hidden md:flex !h-screen items-center justify-center w-1/2 bg-[#6DB33F]">
         <Image
           src="/images/logo.png" // The image is inside the public folder
           alt="Logo"
@@ -130,7 +130,7 @@ const CreateAccount = () => {
       </div>
 
       {/* Left side: Form */}
-      <div className=" w-full md:w-1/2 p-6 bg-white h-screen rounded-lg mb-5 px-6 md:px-20 ">
+      <div className=" w-full md:w-1/2 p-6 bg-white !h-full rounded-lg mb-5 px-6 md:px-20 ">
         <div className="flex justify-end">
           <div className="w-[40px] h-[40px] rounded-full bg-[#C4C4C4]"></div>
         </div>
