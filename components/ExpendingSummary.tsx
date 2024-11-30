@@ -37,7 +37,7 @@ const ExpendingSummary = () => {
   
 
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-4 py-2 px-0 md:px-4">
       {/* Header Section */}
       <div className="flex justify-between ">
         <div className="flex flex-col gap-3">
@@ -48,7 +48,7 @@ const ExpendingSummary = () => {
             {" "}
             $ 1,800.00{" "}
           </p>
-          <p className="text-[#6D7D93] text-[15px] font-normal">
+          <p className="text-[#6D7D93] text-[15px] font-normal mb-7">
             10 transaction
           </p>
         </div>
@@ -83,7 +83,7 @@ const ExpendingSummary = () => {
       {/* Pie Chart Section */}
       <div className="flex justify-center">
         <div className="w-full flex flex-col items-center relative">
-          <div className="mr-[30px] md:mr-[60px] ">
+          <div className="mr-[30px] md:mr-[60px] relative">
             <PieChart
               series={[
                 {
@@ -96,7 +96,33 @@ const ExpendingSummary = () => {
                 legend: { hidden: true },
               }}
             ></PieChart>
-           
+                      <div className="">
+                          {dataLegend.map((item, index) => (
+                              <div
+                                  key={index}
+                                  className="flex justify-start gap-6 items-center"
+                              >
+                                  <div
+                                      className={`w-[3px] md:w-[3px] h-[20px] md:h-[20px]  ${index === 0
+                                          ? "bg-[#A7D18C] absolute !top-[3px] left-[46px] !rotate-[-400deg]"
+                                              : index === 1
+                                              ? "bg-[#8AC26580] absolute !top-[2px] right-[140px] !rotate-[400deg]"
+                                              : "bg-[#6DB33F] absolute !bottom-[10px] right-[248px] !rotate-[400deg]"
+                                          }`}
+                                  >
+                                  </div>
+                                  
+                                  <p className={`text-[#6DB33F] text-[12px] font-medium  ${index === 0
+                                      ? " absolute !top-[-10px] left-[20px] !rotate-[-400deg]"
+                                      : index === 1
+                                          ? " absolute !top-[-9px] right-[116px] !rotate-[400deg]"
+                                          : " absolute !bottom-[-8px] right-[250px] "
+                                      }`}>{ index === 0 ?  "10%" : index=== 1 ? "20%" : "70%"}</p>
+                                 
+                                  {/* Display the name */}
+                              </div>
+                          ))}
+           </div>
 
           </div>
           <div className="absolute !right-[-10px] md:right-1 top-12 md:top-10">
