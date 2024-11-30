@@ -51,7 +51,7 @@ export default function SignIn() {
       </div>
 
       {/* Left side: Form */}
-      <div className=" w-full md:w-1/2 p-6 bg-white h-screen rounded-lg mb-5 px-6 md:px-20  ">
+      <div className=" w-full md:w-1/2 p-6 bg-white h-screen rounded-lg mb-5 px-6 md:px-20  pt-12 ">
         {/* Title */}
         <Typography
           variant="h4"
@@ -114,6 +114,25 @@ export default function SignIn() {
                   input: "text-sm", // Adjust input text size
                 },
               }}
+               sx={{
+                  "& .MuiOutlinedInput-root": {
+                    height: "50px",
+                    borderRadius: "8px",
+                    "& fieldset": {
+                      borderColor: "#E1E9EE",
+                      borderWidth: "1px",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "#93A1AA",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#6DB33F",
+                    },
+                  },
+                  "& .MuiInputBase-input": {
+                    fontSize: "14px",
+                  },
+                }}
             />
             <div className="flex justify-between items-center mb-2">
               <label htmlFor="password" className="text-sm text-gray-600">
@@ -164,6 +183,25 @@ export default function SignIn() {
                   input: "text-sm", // Input text size
                 },
               }}
+               sx={{
+                  "& .MuiOutlinedInput-root": {
+                    height: "50px",
+                    borderRadius: "8px",
+                    "& fieldset": {
+                      borderColor: "#E1E9EE",
+                      borderWidth: "1px",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "#93A1AA",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#6DB33F",
+                    },
+                  },
+                  "& .MuiInputBase-input": {
+                    fontSize: "14px",
+                  },
+                }}
             />
           </div>
           <div className="flex justify-end mt-2 text-sm pt-4">
