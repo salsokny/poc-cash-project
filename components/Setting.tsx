@@ -249,7 +249,7 @@ const Setting = () => {
                 <div className="flex justify-center">
                 <IconQuestion sx={{ fontSize: 0, color: '#6DB33F' }} />
                 </div>
-                <p className="!text-[#000000] !text-center text-[18px] md:!text-[20px] !font-semibold !py-5">
+                <p className="!text-[#000000] !text-center text-[18px] md:!text-[20px] !font-semibold !py-1">
                 Are you sure you want to <br /> Logout?
                 </p>
 
