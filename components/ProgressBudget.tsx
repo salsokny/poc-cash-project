@@ -4,6 +4,7 @@ import { CircularProgress, IconButton } from "@mui/material";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm"; // Example icon
 import IconArrowRight from "@/public/icons/arrowRight";
 import ProgressingBuget from "./progressing";
+import { useRouter } from "next/navigation";
 
 // Define types for the data
 interface ProgressItem {
@@ -54,6 +55,11 @@ const data: ProgressItem[] = [
 ];
 
 const ProgressList: React.FC = () => {
+
+  const router = useRouter()
+  const handleToViewBudget = () => {
+    router.push('/budget/detail')
+  }
   return (
     <div>
       <p className="text-[#324C5B] text-[18px] font-semibold pb-4">
@@ -64,8 +70,9 @@ const ProgressList: React.FC = () => {
           <div
             key={item.id}
             className="bg-white border border-[#6D7D9326] shadow-[2px] p-1 rounded-[8px]"
+            onClick={handleToViewBudget}
           >
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
               <div className="flex justify-start items-center gap-2">
                 <ProgressingBuget />
                 {/* <h3 className="text-lg font-semibold">{item.name}</h3> */}
@@ -80,7 +87,7 @@ const ProgressList: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <IconButton aria-label="delete">
+              <IconButton aria-label="delete" className="rounded-full h-[40px] w-[40px]">
                 <IconArrowRight />
               </IconButton>
             </div>

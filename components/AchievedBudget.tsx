@@ -69,7 +69,7 @@ const AchieVedBudget = () => {
         router.push('/budget/details')
     }
   return (
-    <div className="w-full flex flex-col gap-4 pt-10 mb-20">
+    <div className="w-full flex flex-col gap-4 pt-10 mb-[20px]">
       <div className="w-full">
         <p className="text-[#324C5B] text-[16px] md:text-[20px] font-medium md:font-semibold pt-4">
           Achieved  Budget
@@ -78,7 +78,7 @@ const AchieVedBudget = () => {
           {activeBudget.map((item, index) => (
             <div
               key={index}
-             className={`bg-white  border-[1px] border-[#E1E9EE] !rounded-[10px] gap-2 flex flex-col items-start transition-all duration-300 relative mb-2 md:mb-10`}
+             className={`bg-white  cursor-pointer border-[1px] border-[#E1E9EE] !rounded-[10px] gap-2 flex flex-col items-start transition-all duration-300 relative mb-2 md:mb-10`}
               onClick={handleToBudGetDetail}
             >
               <div className="w-full bg-[#F8F8F8] !rounded-tr-[10px] !rounded-tl-[10px]">

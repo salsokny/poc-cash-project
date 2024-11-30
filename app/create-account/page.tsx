@@ -186,7 +186,6 @@ const CreateAccount = () => {
               },
             }}
           />
-
           {/* Last Name */}
           <label
             htmlFor="email"
@@ -226,7 +225,6 @@ const CreateAccount = () => {
               },
             }}
           />
-
           {/* Gender and Date */}
           <label
             htmlFor="email"
@@ -234,42 +232,34 @@ const CreateAccount = () => {
           >
             Gender
           </label>
-          <FormControl variant="outlined" sx={{ width: "30%" }}>
-            <InputLabel id="gender-label">Gender</InputLabel>
+          {/* sx={{ width: "30%" }} */}
+          <FormControl
+            variant="outlined"
+            sx={{
+              width: "50%",
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "8px",
+                height: "45px",
+                fontSize: "14px",
+                "& fieldset": { borderColor: "#6D7D9326" },
+                "&:hover fieldset": { borderColor: "#6DB33F" },
+                "&.Mui-focused fieldset": { borderColor: "#6DB33F" },
+              },
+            }}
+          >
             <Select
               labelId="gender-label"
               value={gender}
               onChange={handleGenderChange}
-              label="Gender"
+              label=""
               className="text-sm border-gray-300 focus:ring-2 focus:ring-primary-500 rounded-lg" // Tailwind styles for border and focus
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "12px",
-                  "& fieldset": {
-                    borderColor: "#6DB33F", // Default border color
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "#6DB33F", // Border color when hovered
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "#6DB33F", // Border color when focused
-                  },
-                },
-                "& .MuiInputBase-input": {
-                  fontSize: "12px", // Font size for the input text
-                },
-              }}
             >
               <MenuItem value="Custom">Custom</MenuItem>
               <MenuItem value="Male">Male</MenuItem>
               <MenuItem value="Female">Female</MenuItem>
             </Select>
           </FormControl>
-
           {/* <DatePicker label="Basic date picker" /> */}
-          
-         
-
           {/* Email */}
           <label
             htmlFor="email"
@@ -309,7 +299,6 @@ const CreateAccount = () => {
               },
             }}
           />
-
           {/* Password */}
           <label
             htmlFor="email"
@@ -350,7 +339,6 @@ const CreateAccount = () => {
               },
             }}
           />
-
           {/* Confirm Password */}
           <label
             htmlFor="email"
@@ -391,7 +379,6 @@ const CreateAccount = () => {
               },
             }}
           />
-
           {/* Terms and Conditions */}
           <div className="h-[20px]"></div>
           <FormControlLabel
@@ -405,15 +392,13 @@ const CreateAccount = () => {
             }
             label="Show password"
           />
-
           {/* Submit Button */}
-
           <div className="flex justify-end w-full ">
             <Button
               type="submit"
               variant="contained"
               color="primary"
-              className=" mt-[30px] md:mt-12 !text-[16px] md:!text-[18px] !font-medium !bg-[#6DB33F] w-[40%] !normal-case !rounded-[5px] py-2 md:!py-2"
+              className=" mt-[30px] md:mt-12 !text-[16px] md:!text-[18px] !font-medium !bg-[#6DB33F] w-[100%] md:w-[40%] !normal-case !rounded-[5px] py-2 md:!py-2"
             >
               Create an account
             </Button>

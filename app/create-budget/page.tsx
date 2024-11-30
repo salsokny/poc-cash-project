@@ -218,7 +218,7 @@ const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
             {/* Date Picker */}
             <div className="flex flex-col gap-2">
-              <p className="block text-start md:text-center  text-[#324C5B] text-sm font-medium mb-1">
+              <p className="block text-start  text-[#324C5B] text-sm font-medium mb-1">
                 Date Time
               </p>
               <div className="flex justify-end">

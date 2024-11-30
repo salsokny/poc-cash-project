@@ -159,7 +159,7 @@ const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
               <p className="block text-start md:text-center  text-[#324C5B] text-sm font-medium mb-1">
                 Date Time
               </p>
-              <div className="flex justify-end">
+              <div className="flex justify-start">
                 <TextField
                   id="datetime"
                   variant="outlined"

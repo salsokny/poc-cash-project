@@ -27,7 +27,12 @@ export default function RootLayout({
     <CacheProvider value={clientSideEmotionCache}>
       <html lang="en">
         <body className="flex flex-col min-h-screen bg-gray-50">
-          {!hideLayout && <Header />}
+          {/* {!hideLayout && <Header />} */}
+          {!hideLayout && (
+            <header className="sticky top-0 z-50 bg-white !shadow-none">
+              <Header />
+            </header>
+          )}
           <main
             className={`flex-grow !bg-[#f4f7fa] ${
               hideLayout ? "" : "px-4 py-6"
@@ -40,8 +45,8 @@ export default function RootLayout({
             </div>
           </main>
           {!hideLayout && (
-            <footer className="bg-gray-800 text-white">
-              <div className="container mx-auto max-w-6xl p-4">
+            <footer className="!bg-[#FFFFFF] text-white">
+              <div className="container mx-auto max-w-6xl  mb-[30px]">
                 <Footer />
               </div>
             </footer>

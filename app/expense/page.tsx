@@ -5,7 +5,7 @@ import MyExpense from "@/components/MyExpense";
 import FilterExpense from "@/components/FilterExpense"
 const ExpensePage = () => {
   return (
-    <div className="w-full">
+    <div className="w-full mb-[40px]">
       <MyExpense/>
       <FilterExpense/>
     </div>

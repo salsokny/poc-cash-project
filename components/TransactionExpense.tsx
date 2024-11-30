@@ -82,7 +82,7 @@ const TransactionExpense = () => {
         </p>
 
         <form onSubmit={handleSubmit} className="w-full">
-          <div className="flex justify-start gap-4 pt-5">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-5">
             {/* Select Category */}
             <div className="flex flex-col gap-2">
               <p className="block text-[#324C5B] text-sm font-medium mb-1">
@@ -91,7 +91,7 @@ const TransactionExpense = () => {
               <FormControl
                 fullWidth
                 sx={{
-                  width: "280px",
+                  
                   "& .MuiOutlinedInput-root": {
                     borderRadius: "8px",
                     height: "40px",
@@ -123,43 +123,29 @@ const TransactionExpense = () => {
 
             {/* Date Picker */}
             <div className="flex flex-col gap-2">
-              {/* <p className="block text-[#324C5B] text-sm font-medium mb-1">
-                Date
+               <p className="block text-[#324C5B] text-sm font-medium mb-1">
+                 Date Time
               </p>
-              <TextField
-                id="date"
-                variant="outlined"
-                type="date"
-                fullWidth
-                value={date}
-                onChange={handleDateChange}
-                className="text-sm border-gray-300 focus:ring-2 focus:ring-primary-500 !rounded-[12px]"
-                InputProps={{
-                  classes: {
-                    root: "rounded-lg border-gray-300 focus:ring-primary-500",
-                    input: "text-sm",
-                  },
-                }}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    height: "45px",
-                    borderRadius: "8px",
-                    "& fieldset": {
-                      borderColor: "#E1E9EE",
-                      borderWidth: "1px",
+               <TextField
+                  id="datetime"
+                  variant="outlined"
+                  type="datetime-local" // This allows both date and time input
+                  fullWidth
+                  value={date} // The value bound to your `date` state (in the correct format)
+                  onChange={handleDateChange} // Your existing date change handler
+                  placeholder="Select Date and Time" // Placeholder text
+                  className="text-sm border-gray-300 focus:ring-2 focus:ring-primary-500 !rounded-[12px]"
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: "8px",
+                      height: "40px",
+                      fontSize: "14px",
+                      "& fieldset": { borderColor: "#6D7D9326" },
+                      "&:hover fieldset": { borderColor: "#6DB33F" },
+                      "&.Mui-focused fieldset": { borderColor: "#6DB33F" },
                     },
-                    "&:hover fieldset": {
-                      borderColor: "#93A1AA",
-                    },
-                    "&.Mui-focused fieldset": {
-                      borderColor: "#6DB33F",
-                    },
-                  },
-                  "& .MuiInputBase-input": {
-                    fontSize: "14px",
-                  },
-                }}
-              /> */}
+                  }}
+                />
             </div>
           </div>
 

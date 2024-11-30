@@ -4,7 +4,7 @@ import TransactionExpense from "@/components/TransactionExpense";
 const IncomePage = () => {
   return (
     <>
-      <div className="w-full">
+      <div className="w-full mb-[40px]">
         <TransactionExpense />
         
         {/* filter Income */}

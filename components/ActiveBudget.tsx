@@ -51,6 +51,10 @@ const ActiveBudget = () => {
     router.push('/budget/detail')
   }
 
+  const handleToEditBudget = () => {
+    router.push('/create-budget')
+  }
+
   return (
     <div className="w-full flex flex-col gap-4 pt-4 ">
       <p className="text-[#324C5B] text-[20px] md:text-[32px] font-semibold">
@@ -83,7 +87,6 @@ const ActiveBudget = () => {
             <div
               key={index}
               className={`bg-white  border-[1px] border-[#E1E9EE] !rounded-[10px] gap-2 flex flex-col items-start transition-all duration-300 relative `}
-              onClick={handleToBudGetDetail}
             >
               <div className="w-full bg-[#F8F8F8] !rounded-tr-[10px] !rounded-tl-[10px]">
                 <div className="flex justify-between items-center gap-2 p-2">
@@ -94,7 +97,7 @@ const ActiveBudget = () => {
                     <IconButton aria-label="delete">
                       <IconsDelete />
                     </IconButton>
-                    <IconButton aria-label="delete">
+                    <IconButton onClick={handleToEditBudget} aria-label="delete">
                       <IconEdit />
                     </IconButton>
 
@@ -104,7 +107,10 @@ const ActiveBudget = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-full p-4 bg-[#FFFFFF] rounded-br-[10px] rounded-bl-[10px]">
+              <div
+                onClick={handleToBudGetDetail}
+                className="w-full !p-4 !cursor-pointer bg-[#FFFFFF] !rounded-br-[10px] rounded-bl-[10px]"
+              >
                 <div className="flex flex-col gap-3">
                   <div className="flex justify-start gap-5">
                     <IconBudget />

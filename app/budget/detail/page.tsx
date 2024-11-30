@@ -33,7 +33,8 @@ const BudgetDetailPage = () => {
     };
 
     const handleGoBack = () => {
-        router.push('/budget')
+        // router.push('/budget')
+         window.history.go(-1);
     }
 
     return (

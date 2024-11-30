@@ -53,7 +53,6 @@ export default function PieChartWithPaddingAngle() {
         width={80}
         height={80}
         legend={{ hidden: true }}
-        tooltip={false}
       >
         <PieCenterLabel percentage={percentage} />
       </PieChart>
