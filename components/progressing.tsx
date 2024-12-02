@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import Stack from "@mui/material/Stack";
 import { PieChart } from "@mui/x-charts/PieChart";
@@ -17,7 +18,6 @@ const StyledText = styled("text")(({ theme }) => ({
   fontSize: 10,
 }));
 
-
 function PieCenterLabel({ percentage }: { percentage: string }) {
   const { width, height, left, top } = useDrawingArea();
 
@@ -30,7 +30,6 @@ function PieCenterLabel({ percentage }: { percentage: string }) {
     </>
   );
 }
-
 
 export default function PieChartWithPaddingAngle() {
   // Calculate total value

@@ -1,13 +1,12 @@
 "use client";
-
 import * as React from "react";
 import { LineChart, lineElementClasses } from "@mui/x-charts/LineChart";
 import {
-    Select,
-    MenuItem,
-    FormControl,
-    InputLabel,
-    OutlinedInput,
+  Select,
+  MenuItem,
+  FormControl,
+  OutlinedInput,
+  SelectChangeEvent,
 } from "@mui/material";
 
 // Example data for each month
@@ -45,7 +44,7 @@ const xLabels = [
 const yLabels = [0, 2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000];
 
 const AnalitcsReportChart: React.FC = () => {
-    const [selectedMonth, setSelectedMonth] = React.useState<keyof typeof monthlyData>("Jan");
+    const [selectedMonth] = React.useState<keyof typeof monthlyData>("Jan");
 
     const totalExpense = "Total Expense"; // Example value
     const [selectTotalExpense, setSelectTotalExpense] = React.useState<string>(totalExpense);
@@ -67,20 +66,16 @@ const AnalitcsReportChart: React.FC = () => {
         monthlyData[selectedMonth as keyof typeof monthlyData];
 
     // Calculate total earnings for the selected month
-    const totalEarnings = filteredData
-        ? filteredData.reduce((sum, value) => sum + value, 0)
-        : 0;
+    // const totalEarnings = filteredData
+    //     ? filteredData.reduce((sum, value) => sum + value, 0)
+    //     : 0;
 
-    const handleChangeTotalExpense = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        setSelectTotalExpense(event.target.value);
+    const handleChangeTotalExpense = (event: SelectChangeEvent<string>) => {
+      setSelectTotalExpense(event.target.value);
     };
 
-    const handleEarningFilterChange = (
-        event: React.ChangeEvent<{ value: unknown }>
-    ) => {
-        setEarningFilter(Number(event.target.value));
+    const handleEarningFilterChange = (event: SelectChangeEvent<string>) => {
+      setEarningFilter(Number(event.target.value));
     };
 
     return (
@@ -163,14 +158,6 @@ const AnalitcsReportChart: React.FC = () => {
                             color: "#bfe7a4", // 20% opacity
                         },
                     ]}
-                    tooltip={{
-                        trigger: 'axis', // Shows the tooltip on item hover
-                        backgroundColor: "#bfe7a4", // Tooltip background color
-                        color: "#bfe7a4", // Tooltip text color
-                        fontSize: "14px", // Font size for the tooltip
-                        padding: "8px", // Padding inside the tooltip
-                        borderRadius: "8px", // Border radius for rounded corners
-                    }}
                     slotProps={{
                         legend: { hidden: true },
                        
@@ -192,9 +179,6 @@ const AnalitcsReportChart: React.FC = () => {
                         margin: "0 auto", // Centers the chart
                         [`& .${lineElementClasses.root}`]: {
                             backgroundColor: "#FF0000", // Red background color for the area element
-                        },
-                        [`& .${lineElementClasses.area}`]: {
-                            backgroundColor: "#FF0000", // Red color for the area under the line
                         },
                     }}
                 />

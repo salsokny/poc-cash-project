@@ -1,9 +1,11 @@
+
+"use client";
 import IconCategory from "@/public/icons/category";
 import IconDeleteAccount from "@/public/icons/deleteAccount";
 import IconEdit from "@/public/icons/edit";
 import IconLogOut from "@/public/icons/logOut";
 import IconSetting from "@/public/icons/setting";
-import { Avatar, Button, Divider,   Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import { Avatar, Button, Divider,   Dialog } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import IconQuestion from "@/public/icons/question";
@@ -247,7 +249,7 @@ const Setting = () => {
             }}>
             <div className="flex flex-col gap-4 !pt-3 md:!pt-6 !pb-6 md:!pb-8 px-8 md:!px-12">
                 <div className="flex justify-center">
-                <IconQuestion sx={{ fontSize: 0, color: '#6DB33F' }} />
+                <IconQuestion />
                 </div>
                 <p className="!text-[#000000] !text-center text-[18px] md:!text-[20px] !font-semibold !py-1">
                 Are you sure you want to <br /> Logout?

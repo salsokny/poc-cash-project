@@ -1,65 +1,67 @@
 "use client";
 import React, { useState } from "react";
-import { CircularProgress, FormControl, IconButton, MenuItem, Select } from "@mui/material";
-import AccessAlarmIcon from "@mui/icons-material/AccessAlarm"; // Example icon
-import IconArrowRight from "@/public/icons/arrowRight";
-import ProgressingBuget from "./progressing";
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import RechartsBarChart from "./BarChartBudget";
 
 // Define types for the data
-interface ProgressItem {
-  id: number;
-  name: string;
-  progress: number; // Progress as a percentage (0-100)
-  month: string;
-  icon: React.ReactNode; // The icon can be any React component
-}
+// interface ProgressItem {
+//   id: number;
+//   name: string;
+//   progress: number; // Progress as a percentage (0-100)
+//   month: string;
+//   icon: React.ReactNode; // The icon can be any React component
+// }
 
 // Example Data
-const data: ProgressItem[] = [
-  {
-    id: 1,
-    name: "Sale of goods",
-    progress: 75, // Progress as percentage
-    month: "1 month later",
-    icon: <AccessAlarmIcon />, // Example icon
-  },
-  {
-    id: 2,
-    name: "property rental",
-    progress: 50,
-    month: "February",
-    icon: <AccessAlarmIcon />,
-  },
-  {
-    id: 3,
-    name: "design services",
-    progress: 90,
-    month: "3 month later",
-    icon: <AccessAlarmIcon />,
-  },
-  {
-    id: 4,
-    name: "Service",
-    progress: 50,
-    month: "4 month later",
-    icon: <AccessAlarmIcon />,
-  },
-  {
-    id: 5,
-    name: "Service",
-    progress: 90,
-    month: "1 month later",
-    icon: <AccessAlarmIcon />,
-  },
-];
+// const data: ProgressItem[] = [
+//   {
+//     id: 1,
+//     name: "Sale of goods",
+//     progress: 75, // Progress as percentage
+//     month: "1 month later",
+//     icon: <AccessAlarmIcon />, // Example icon
+//   },
+//   {
+//     id: 2,
+//     name: "property rental",
+//     progress: 50,
+//     month: "February",
+//     icon: <AccessAlarmIcon />,
+//   },
+//   {
+//     id: 3,
+//     name: "design services",
+//     progress: 90,
+//     month: "3 month later",
+//     icon: <AccessAlarmIcon />,
+//   },
+//   {
+//     id: 4,
+//     name: "Service",
+//     progress: 50,
+//     month: "4 month later",
+//     icon: <AccessAlarmIcon />,
+//   },
+//   {
+//     id: 5,
+//     name: "Service",
+//     progress: 90,
+//     month: "1 month later",
+//     icon: <AccessAlarmIcon />,
+//   },
+// ];
 
 const BudgetAchievement = () => {
      const [timeFrame, setTimeFrame] = useState("This Week");
 
-     const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+     const handleChange = (event: SelectChangeEvent<string>) => {
        setTimeFrame(event.target.value as string);
-    };
+     };
     
   return (
     <div className="w-full ">

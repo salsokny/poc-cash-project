@@ -7,8 +7,8 @@ import {
   MenuItem,
   Select,
   TextField,
+  SelectChangeEvent,
 } from "@mui/material";
-import { format } from "date-fns";
 
 const categories = [
   { id: 1, name: "Technology" },
@@ -30,7 +30,7 @@ const MyExpense = () => {
     date: "",
   });
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleChange = (event: SelectChangeEvent<string>) => {
     setSelectedCategory(event.target.value as string);
   };
 
@@ -48,18 +48,18 @@ const MyExpense = () => {
     setNote(e.target.value);
   };
 
-  const [formattedDate, setFormattedDate] = useState("");
+  // const [formattedDate, setFormattedDate] = useState("");
 
 const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const inputDate = new Date(e.target.value); // Create a Date object from the input value
+  // const inputDate = new Date(e.target.value); // Create a Date object from the input value
   const formattedDateForInput = e.target.value; // Keep the value in the correct format for the input
 
   // Format the date for display
-  const formattedDateForDisplay = format(inputDate, "dd MMMM yyyy h:mm a");
+  // const formattedDateForDisplay = format(inputDate, "dd MMMM yyyy h:mm a");
 
   // Update the state
   setDate(formattedDateForInput); // Store the value for datetime-local
-  setFormattedDate(formattedDateForDisplay); // Store the formatted date for display
+  // setFormattedDate(formattedDateForDisplay); // Store the formatted date for display
 };
 
   const validateForm = () => {

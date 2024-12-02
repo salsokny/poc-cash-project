@@ -1,13 +1,12 @@
 "use client";
-
 import {
   Button,
   FormControl,
-  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
   TextField,
+  SelectChangeEvent,
 } from "@mui/material";
 import React, { useState } from "react";
 
@@ -26,7 +25,7 @@ const TransactionExpense = () => {
   const [note, setNote] = useState("");
   const [date, setDate] = useState("");
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleChange = (event: SelectChangeEvent<string>) => {
     setSelectedCategory(event.target.value as string);
   };
 

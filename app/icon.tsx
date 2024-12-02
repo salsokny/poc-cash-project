@@ -1,6 +1,5 @@
-import IconAdjustment from '@/public/icons/adjustment';
+
 import IconLogo from '@/public/icons/logo';
-import Image from 'next/image';
 import { ImageResponse } from 'next/og'
  
 // Image metadata

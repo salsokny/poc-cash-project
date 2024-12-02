@@ -3,12 +3,10 @@
 import { Button, TextField } from "@mui/material";
 import Image from "next/image";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import IconHidePassword from "@/public/icons/hidenPasswork";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const EnterNewPassword = () => {
-  const router = useRouter();
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState({ newPassword: "", confirmPassword: "" });

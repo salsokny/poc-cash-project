@@ -12,7 +12,6 @@ import RecentTransaction from "@/components/RecentTransaction";
 import ExpendingSummary from "@/components/ExpendingSummary";
 import ProgressList from "@/components/ProgressBudget";
 import BudgetAchievement from "@/components/BudgetAchievement";
-import LineChartWithCustomTooltip from "@/components/ChartLine";
 import IconClock from "@/public/icons/clock";
 
 

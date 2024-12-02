@@ -1,12 +1,6 @@
 "use client";
-import IconBudget from "@/public/icons/budget";
-import IconsDelete from "@/public/icons/delete";
-import IconEdit from "@/public/icons/edit";
-import IconSeeMoreTop from "@/public/icons/seeMoreTop";
-import { Button, IconButton, LinearProgress, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { IconButton} from "@mui/material";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import IconArrowLeft from "@/public/icons/arrowLeft";
 import IconBag from "@/public/icons/bag";
 import IconMoney from "@/public/icons/money";
@@ -14,21 +8,11 @@ import IconPig from "@/public/icons/pig";
 import PieChartWithCenterLabelCompleted from "@/components/chartCompleted";
 
 const BudgetDetailPage = () => {
-  const [value, setValue] = useState(75);
-  const router = useRouter();
 
   const [typeCurrency] = useState([
     { name: "Current money", icon: <IconPig />, price: "10.00 USD" },
     { name: "Product 2", icon: <IconMoney />, price: "50.00 USD" },
   ]);
-
-  const formatNumber = (value: number): string => {
-    return new Intl.NumberFormat("en-US", {
-      style: "decimal",
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(value);
-  };
 
   const handleGoBack = () => {
     // router.push("/budget");

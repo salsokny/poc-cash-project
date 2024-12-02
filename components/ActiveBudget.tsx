@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const ActiveBudget = () => {
-  const [value, setValue] = useState(75);
+ const [value] = useState(75); 
   const router = useRouter();
   const [activeBudget] = useState([
     {

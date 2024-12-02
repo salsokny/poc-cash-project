@@ -17,7 +17,14 @@ import IconLoan from "@/public/icons/loan";
 import IconParental from "@/public/icons/parental";
 import IconInsurance from "@/public/icons/insurance";
 import IconAdjustment from "@/public/icons/adjustment";
-import { FormControl, IconButton, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  FormControl,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import IconsDelete from "@/public/icons/delete";
 import IconEdit from "@/public/icons/edit";
 
@@ -143,7 +150,7 @@ const ExpensePage = () => {
 
   const [category, setCategory] = useState("");
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleChange = (event: SelectChangeEvent<string>) => {
     setCategory(event.target.value as string);
   };
 

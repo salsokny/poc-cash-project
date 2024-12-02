@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+"use client";
+import React from "react"; 
 import {
   BarChart,
   Bar,
@@ -8,7 +9,6 @@ import {
   ResponsiveContainer,
   Cell,
   CartesianGrid,
-  Legend,
 } from "recharts";
 
 // Define the type for each data point

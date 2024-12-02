@@ -1,9 +1,6 @@
 "use client"; // To mark this as a client-side component
 import React, { useState } from "react";
 import Image from "next/image"; // For logo image
-import { useRouter } from "next/navigation";
-import IconHidePassword from "@/public/icons/hidenPasswork";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import {
   Button,
   Checkbox,
@@ -12,12 +9,11 @@ import {
   MenuItem,
   Select,
   FormControl,
-  InputLabel,
+  SelectChangeEvent,
 } from "@mui/material";
 // import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const CreateAccount = () => {
-  const router = useRouter();
   const [gender, setGender] = useState<string>("Custom");
 
   const [formData, setFormData] = useState({
@@ -48,19 +44,41 @@ const CreateAccount = () => {
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
       password
     );
-
+  
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value, checked } = e.target;
+    const { name, value, type } = e.target;
+
+    // Type guard: check if the element is a checkbox or radio button
+    const newValue =
+      type === "checkbox" || type === "radio"
+        ? (e.target as HTMLInputElement).checked // Type assertion here
+        : value;
+
     setFormData((prev) => ({
       ...prev,
-      [name]: name === "termsAccepted" ? checked : value,
+      [name]:
+        name === "termsAccepted"
+          ? (e.target as HTMLInputElement).checked
+          : newValue,
     }));
 
     // Clear errors on input change
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
+  // const handleChange = (
+  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  // ) => {
+  //   const { name, value, checked } = e.target;
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     [name]: name === "termsAccepted" ? checked : value,
+  //   }));
+
+  //   // Clear errors on input change
+  //   setErrors((prev) => ({ ...prev, [name]: "" }));
+  // };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -105,15 +123,15 @@ const CreateAccount = () => {
       };
 
     if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
+      // setErrors(validationErrors);
     } else {
       console.log("Form submitted successfully:", formData);
       // Perform further actions such as API call
     }
   };
 
-  const handleGenderChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setGender(event.target.value as string);
+  const handleGenderChange = (event: SelectChangeEvent<string>) => {
+   setGender(event.target.value);
   };
 
   return (

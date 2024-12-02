@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import {
   FormControl,
@@ -13,6 +14,7 @@ import {
   TableHead,
   TableRow,
   Paper,
+  SelectChangeEvent,
 } from "@mui/material";
 import { SketchPicker, ColorResult } from "react-color";
 import { styled } from "@mui/material/styles";
@@ -40,7 +42,7 @@ interface RowData {
 
 const data: RowData[] = [
   {
-    icon: <IconCategoryTale style={{ color: "white" }} />,
+    icon: <IconCategoryTale />,
     name: "Transport"
   },
  
@@ -68,10 +70,22 @@ const CreateCategoryForm = () => {
   };
 
   // Handle form field changes
-  const handleChange =
-    (field: string) =>
-    (event: React.ChangeEvent<{ value: unknown }>) => {
-      setFormData({ ...formData, [field]: event.target.value as string });
+//   const handleChange =
+//     (field: string) =>
+//     (event: React.ChangeEvent<{ value: unknown }>) => {
+//       setFormData({ ...formData, [field]: event.target.value as string });
+    //     };
+    
+   const handleChange =
+     (field: string) =>
+     (event: SelectChangeEvent<string | { value: unknown }>) => {
+       setFormData({ ...formData, [field]: event.target.value as string });
+ };
+    
+    const handleChangeName = (
+      event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+      setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
   const IconComponent = (Icons as Record<string, React.ElementType>)[formData.icon] || null;
@@ -83,29 +97,33 @@ const CreateCategoryForm = () => {
           {/* Select Icon */}
           <div className="flex flex-col gap-4">
             <p className="text-[#3324C5B] text-[18px] font-normal">Icon</p>
-            <FormControl fullWidth sx={{ marginBottom: 2 }} className="relative"  sx={{
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "12px", // Adjusted to match your desired style
-                "& fieldset": {
-                  borderColor: "#E1E9EE", // Default border color
-                  borderWidth: "1px", // Ensure the border width is consistent
+            <FormControl
+              fullWidth
+              className="relative"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "12px", // Adjusted to match your desired style
+                  "& fieldset": {
+                    borderColor: "#E1E9EE", // Default border color
+                    borderWidth: "1px", // Ensure the border width is consistent
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#93A1AA", // Hover border color
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#6DB33F", // Border color when focused
+                  },
                 },
-                "&:hover fieldset": {
-                  borderColor: "#93A1AA", // Hover border color
+                "& .MuiInputBase-input": {
+                  fontSize: "12px", // Adjust input text size
                 },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#6DB33F", // Border color when focused
+                "& .MuiFormHelperText-root": {
+                  fontSize: "14px", // Adjust error message size
                 },
-              },
-              "& .MuiInputBase-input": {
-                fontSize: "12px", // Adjust input text size
-              },
-              "& .MuiFormHelperText-root": {
-                fontSize: "14px", // Adjust error message size
-              },
-            }}> 
+              }}
+            >
               <Select
-               className="!text-[#FFFFFF]"
+                className="!text-[#FFFFFF]"
                 labelId="icon-label"
                 value={formData.icon}
                 onChange={handleChange("icon")}
@@ -123,7 +141,7 @@ const CreateCategoryForm = () => {
                 <MenuItem value="Favorite">Favorite</MenuItem>
               </Select>
               <div className="text-center absolute top-1 left-2">
-                <StyledIcon >
+                <StyledIcon color="blue">
                   {IconComponent ? <IconComponent fontSize="large" /> : null}
                 </StyledIcon>
               </div>
@@ -134,33 +152,36 @@ const CreateCategoryForm = () => {
             <p className="text-[#3324C5B] text-[18px] font-normal mb-4">
               Background Color
             </p>
-            <FormControl fullWidth sx={{ marginBottom: 2 }} className="relative"  sx={{
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "12px", // Adjusted to match your desired style
-                "& fieldset": {
-                  borderColor: "#E1E9EE", // Default border color
-                  borderWidth: "1px", // Ensure the border width is consistent
+            <FormControl
+              fullWidth
+              className="relative"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "12px", // Adjusted to match your desired style
+                  "& fieldset": {
+                    borderColor: "#E1E9EE", // Default border color
+                    borderWidth: "1px", // Ensure the border width is consistent
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#93A1AA", // Hover border color
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#6DB33F", // Border color when focused
+                  },
                 },
-                "&:hover fieldset": {
-                  borderColor: "#93A1AA", // Hover border color
+                "& .MuiInputBase-input": {
+                  fontSize: "12px", // Adjust input text size
                 },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#6DB33F", // Border color when focused
+                "& .MuiFormHelperText-root": {
+                  fontSize: "14px", // Adjust error message size
                 },
-              },
-              "& .MuiInputBase-input": {
-                fontSize: "12px", // Adjust input text size
-              },
-              "& .MuiFormHelperText-root": {
-                fontSize: "14px", // Adjust error message size
-              },
-            }}>
+              }}
+            >
               <Select
-                ref={selectRef as React.RefObject<any>}
+                ref={selectRef}
                 labelId="background-color-label"
                 value={backgroundColor}
                 onChange={(e) => setBackgroundColor(e.target.value)}
-              
                 MenuProps={{
                   PaperProps: {
                     style: { borderRadius: "12px" },
@@ -177,7 +198,6 @@ const CreateCategoryForm = () => {
                 </MenuItem>
               </Select>
 
-              {/* Clickable Circle to Open Dropdown */}
               <div
                 style={{ backgroundColor }}
                 className="absolute top-3 left-4 text-white w-[30px] h-[30px] rounded-full cursor-pointer"
@@ -189,17 +209,16 @@ const CreateCategoryForm = () => {
               ></div>
             </FormControl>
           </div>
-          
         </div>
         <div className="flex flex-col">
-           <p className="text-[#3324C5B] text-[18px] font-normal mb-4">Name</p>
-           <TextField
+          <p className="text-[#3324C5B] text-[18px] font-normal mb-4">Name</p>
+          <TextField
             placeholder="New category name"
             variant="outlined"
             fullWidth
             name="name"
             value={formData.name}
-            onChange={handleChange}
+            onChange={handleChangeName}
             className="text-sm border-gray-300 focus:ring-2 focus:ring-primary-500 rounded-lg" // Tailwind styles for border and focus
             sx={{
               "& .MuiOutlinedInput-root": {
@@ -223,59 +242,75 @@ const CreateCategoryForm = () => {
               },
             }}
           />
-          </div>
-           <div className="flex justify-start w-full pt-5">
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              className=" mt-[30px] md:mt-[10px] !text-[16px] md:!text-[18px] !font-medium !bg-[#6DB33F] w-full md:w-[40%] !normal-case !rounded-[5px] py-2 md:!py-2"
-            >
-             Add Category
-            </Button>
-          </div>
+        </div>
+        <div className="flex justify-start w-full pt-5">
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className=" mt-[30px] md:mt-[10px] !text-[16px] md:!text-[18px] !font-medium !bg-[#6DB33F] w-full md:w-[40%] !normal-case !rounded-[5px] py-2 md:!py-2"
+          >
+            Add Category
+          </Button>
+        </div>
       </form>
- {/* Table */}
-    <div className="w-full bg-[#FFFFFF] pt-6">
-      <p className="text-[##324C5B] text-[22px] font-semibold my-[30px]">Manage Category</p>
-     <TableContainer  sx={{ boxShadow: 'none' }} component={Paper} elevation={3}>
-      <Table sx={{ border: 'none' }}>
-        <TableHead  className="!bg-[#F5F5F5] border-b-[#F5F5F5] !border-[0px]">
-          <TableRow className="!bg-[#F5F5F5] border-b-[#F5F5F5] !border-[0px]">
-            <TableCell align="center" style={{ fontWeight: "bold" }}>Iconss</TableCell>
-            <TableCell  align="center" style={{ fontWeight: "bold" }}>Name</TableCell>
-             <TableCell  align="center" style={{ fontWeight: "bold" }}>Note</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((row, index) => (
-            <TableRow
-             key={index} sx={{ border: 'none' }}
-            >
-              <TableCell align="center">
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  {row.icon}
-                </div>
-              </TableCell>
-              <TableCell align="center">
-              <p className="text-[#47B5FF] text-[16px] font-medium">  {row.name} </p>
-              </TableCell>
+      {/* Table */}
+      <div className="w-full bg-[#FFFFFF] pt-6">
+        <p className="text-[##324C5B] text-[22px] font-semibold my-[30px]">
+          Manage Category
+        </p>
+        <TableContainer
+          sx={{ boxShadow: "none" }}
+          component={Paper}
+          elevation={3}
+        >
+          <Table sx={{ border: "none" }}>
+            <TableHead className="!bg-[#F5F5F5] border-b-[#F5F5F5] !border-[0px]">
+              <TableRow className="!bg-[#F5F5F5] border-b-[#F5F5F5] !border-[0px]">
+                <TableCell align="center" style={{ fontWeight: "bold" }}>
+                  Iconss
+                </TableCell>
+                <TableCell align="center" style={{ fontWeight: "bold" }}>
+                  Name
+                </TableCell>
+                <TableCell align="center" style={{ fontWeight: "bold" }}>
+                  Note
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map((row, index) => (
+                <TableRow key={index} sx={{ border: "none" }}>
+                  <TableCell align="center">
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      {row.icon}
+                    </div>
+                  </TableCell>
+                  <TableCell align="center">
+                    <p className="text-[#47B5FF] text-[16px] font-medium">
+                      {" "}
+                      {row.name}{" "}
+                    </p>
+                  </TableCell>
 
-               <TableCell   align="center" style={{ color: "white", fontWeight: "bold" }}>
-                <div className="flex justify-center gap-2">
-                  <IconButton aria-label="delete">
-                    <IconsDelete />
-                  </IconButton>
-                  <IconButton aria-label="delete">
-                    <IconEdit />
-                  </IconButton>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                  <TableCell
+                    align="center"
+                    style={{ color: "white", fontWeight: "bold" }}
+                  >
+                    <div className="flex justify-center gap-2">
+                      <IconButton aria-label="delete">
+                        <IconsDelete />
+                      </IconButton>
+                      <IconButton aria-label="delete">
+                        <IconEdit />
+                      </IconButton>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
     </div>
   );

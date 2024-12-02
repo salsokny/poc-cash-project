@@ -11,7 +11,7 @@ import {
   List,
   ListItem,
   ListItemText,
-  Dialog, DialogActions, DialogContent, DialogTitle
+  Dialog
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Image from "next/image";
@@ -159,7 +159,7 @@ export default function Header() {
         <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
           <div className="w-64 p-4">
             <List>
-              <ListItem button onClick={() => handleNavigation("/home")}>
+              <ListItem  onClick={() => handleNavigation("/home")}>
                 <ListItemText
                   primary="Home"
                   className={`${
@@ -169,7 +169,7 @@ export default function Header() {
                   }`}
                 />
               </ListItem>
-              <ListItem button onClick={() => handleNavigation("/income")}>
+              <ListItem  onClick={() => handleNavigation("/income")}>
                 <ListItemText
                   primary="Income"
                   className={`${
@@ -179,7 +179,7 @@ export default function Header() {
                   }`}
                 />
               </ListItem>
-              <ListItem button onClick={() => handleNavigation("/expense")}>
+              <ListItem  onClick={() => handleNavigation("/expense")}>
                 <ListItemText
                   primary="Expense"
                   className={`${
@@ -189,7 +189,7 @@ export default function Header() {
                   }`}
                 />
               </ListItem>
-              <ListItem button onClick={() => handleNavigation("/budget")}>
+              <ListItem  onClick={() => handleNavigation("/budget")}>
                 <ListItemText
                   primary="Budget"
                   className={`${
@@ -222,7 +222,7 @@ export default function Header() {
           }}>
           <div className="flex flex-col gap-4 !pt-3 md:!pt-6 !pb-6 md:!pb-8 px-8 md:!px-12">
             <div className="flex justify-center">
-              <IconQuestion sx={{ fontSize: 0, color: '#6DB33F' }} />
+              <IconQuestion  />
             </div>
             <p className="!text-[#000000] !text-center text-[18px] md:!text-[20px] !font-semibold !py-1">
               Are you sure you want to <br /> Logout?

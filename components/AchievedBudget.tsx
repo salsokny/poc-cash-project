@@ -1,16 +1,13 @@
 "use client";
 import IconBudget from "@/public/icons/budget";
-import IconsDelete from "@/public/icons/delete";
-import IconEdit from "@/public/icons/edit";
 import IconSeeMoreTop from "@/public/icons/seeMoreTop";
-import { Router } from "@mui/icons-material";
-import { Button, IconButton, LinearProgress, Typography } from "@mui/material";
+import { IconButton, LinearProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const AchieVedBudget = () => {
-  const [value, setValue] = useState(100);
+  const [value] = useState(100);
   const router = useRouter();
   const [activeBudget] = useState([
     {

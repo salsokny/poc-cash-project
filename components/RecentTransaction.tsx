@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import {
   Table,
@@ -10,7 +11,6 @@ import {
   Paper,
   Chip,
   TablePagination,
-  Button,
   TextField,
   MenuItem,
   Select,
@@ -19,7 +19,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import IconClock from "@/public/icons/clock";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 
 interface Data {
   id: number;
@@ -168,11 +168,16 @@ const CheckboxTable: React.FC = () => {
     setSelected(newSelected);
   };
 
-  const handlePageChange = (_: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+  const handlePageChange = (
+    _: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
     setCurrentPage(newPage);
   };
 
-  const handleRowsPerPageChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleRowsPerPageChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setCurrentPage(0);
   };
@@ -185,7 +190,9 @@ const CheckboxTable: React.FC = () => {
     if (filter === "last30days") {
       const last30Days = new Date();
       last30Days.setDate(now.getDate() - 30);
-      filteredRows = filteredRows.filter((row) => new Date(row.dateTime) >= last30Days);
+      filteredRows = filteredRows.filter(
+        (row) => new Date(row.dateTime) >= last30Days
+      );
     } else if (filter === "thisweek") {
       const startOfWeek = new Date();
       startOfWeek.setDate(now.getDate() - now.getDay());
@@ -197,7 +204,9 @@ const CheckboxTable: React.FC = () => {
       });
     } else if (filter === "thismonth") {
       const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-      filteredRows = filteredRows.filter((row) => new Date(row.dateTime) >= startOfMonth);
+      filteredRows = filteredRows.filter(
+        (row) => new Date(row.dateTime) >= startOfMonth
+      );
     }
 
     // Apply search filter
@@ -229,7 +238,7 @@ const CheckboxTable: React.FC = () => {
             sx={{
               minWidth: 200,
               "& .MuiOutlinedInput-root": {
-                 height: '40px',
+                height: "40px",
                 borderRadius: "10px",
                 "& fieldset": {
                   borderColor: "#E1E9EE", // Default border color
@@ -267,7 +276,7 @@ const CheckboxTable: React.FC = () => {
           </Select>
         </FormControl>
 
-       <TextField
+        <TextField
           size="small"
           label=""
           variant="outlined"
@@ -282,14 +291,13 @@ const CheckboxTable: React.FC = () => {
               </InputAdornment>
             ),
             // Customize the input element's styles
-          
           }}
           sx={{
             minWidth: 300,
-           
+
             // Additional styling for the TextField container if needed
             "& .MuiOutlinedInput-root": {
-               height: '40px', 
+              height: "40px",
               borderRadius: "10px", // Border radius for the overall input
             },
             "& .MuiInputBase-input": {
@@ -316,12 +324,12 @@ const CheckboxTable: React.FC = () => {
                   onChange={handleSelectAllClick}
                 />
               </TableCell>
-              <TableCell >
+              <TableCell>
                 <p className="!text-[#6B7280] !text-[14px] !font-semibold">
                   TRANSACTION
                 </p>
               </TableCell>
-              <TableCell >
+              <TableCell>
                 {" "}
                 <p className="!text-[#6B7280] !text-[14px] !font-semibold">
                   DATE & TIME

@@ -6,10 +6,8 @@ import {
   Select,
   MenuItem,
   FormControl,
-  InputLabel
+  SelectChangeEvent,
 } from "@mui/material";
-// import { Cell, Pie } from "recharts";
-import {  Pie, Tooltip, Cell } from "recharts";
 
 const data = [
     { value: 20, label: "Health Care: 20%", color: "#8AC265" },
@@ -25,7 +23,7 @@ const size = {
 const ExpendingSummary = () => {
   const [timeFrame, setTimeFrame] = useState("This Week");
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleChange = (event: SelectChangeEvent<string>) => {
     setTimeFrame(event.target.value as string);
   };
 

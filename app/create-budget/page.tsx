@@ -7,8 +7,8 @@ import {
   MenuItem,
   Select,
   TextField,
+  SelectChangeEvent
 } from "@mui/material";
-import { format } from "date-fns";
 
 const categories = [
   { id: 1, name: "Technology" },
@@ -40,15 +40,13 @@ const CreateBudget = () => {
     date: "",
   });
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-       console.log("ahellel", event.target)
-    setSelectedCategory(event.target.value as string);
+  const handleChange = (event: SelectChangeEvent<string>) => {
+    setSelectedCategory(event.target.value);
   };
 
- const handleChangeAmount = (event: React.ChangeEvent<{ value: unknown }>)=> {
-     console.log("ahellel", event)
-    setSelectedBudgetAmount(event.target.value as string);
- }
+ const handleChangeAmount = (event: SelectChangeEvent<string>) => {
+   setSelectedBudgetAmount(event.target.value);
+ };
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -63,19 +61,12 @@ const CreateBudget = () => {
   const handleNoteChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNote(e.target.value);
   };
-
-  const [formattedDate, setFormattedDate] = useState("");
-
 const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const inputDate = new Date(e.target.value); // Create a Date object from the input value
+  // const inputDate = new Date(e.target.value); // Create a Date object from the input value
   const formattedDateForInput = e.target.value; // Keep the value in the correct format for the input
-
-  // Format the date for display
-  const formattedDateForDisplay = format(inputDate, "dd MMMM yyyy h:mm a");
 
   // Update the state
   setDate(formattedDateForInput); // Store the value for datetime-local
-  setFormattedDate(formattedDateForDisplay); // Store the formatted date for display
 };
 
   const validateForm = () => {
@@ -203,7 +194,7 @@ const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                   size="small"
                 >
                   {amounts.map((item) => (
-                    <MenuItem key={item.id} value={item.amount}>
+                    <MenuItem key={item.id} value={item.name}>
                       {item.name}
                     </MenuItem>
                   ))}

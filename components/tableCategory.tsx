@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   Table,
@@ -8,22 +9,18 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import HomeIcon from "@mui/icons-material/Home";
-import WorkIcon from "@mui/icons-material/Work";
-import IconCategoryTale from "@/public/icons/tableCategory"
+import IconCategoryTale from "@/public/icons/categoryTable";
 
 interface RowData {
   icon: React.ReactNode; // Icon component
-  name: string; // Row name
+  name: string; // Row name style={{ color: "white" }}
 }
 
 const data: RowData[] = [
   {
-    icon: <IconCategoryTale style={{ color: "white" }} />,
-    name: "Transport"
+    icon: <IconCategoryTale  />,
+    name: "Transport",
   },
- 
 ];
 
 const TableCategory = () => {
@@ -34,14 +31,12 @@ const TableCategory = () => {
           <TableRow>
             <TableCell style={{ fontWeight: "bold" }}>Iconss</TableCell>
             <TableCell style={{ fontWeight: "bold" }}>Name</TableCell>
-             <TableCell style={{ fontWeight: "bold" }}>Note</TableCell>
+            <TableCell style={{ fontWeight: "bold" }}>Note</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {data.map((row, index) => (
-            <TableRow
-              key={index}
-            >
+            <TableRow key={index}>
               <TableCell align="center">
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   {row.icon}

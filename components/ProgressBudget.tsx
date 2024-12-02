@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { CircularProgress, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm"; // Example icon
 import IconArrowRight from "@/public/icons/arrowRight";
 import ProgressingBuget from "./progressing";
